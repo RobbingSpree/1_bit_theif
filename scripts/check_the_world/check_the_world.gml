@@ -17,6 +17,5 @@ enum state {
 	solid_mov, //solid object movable
 	solid_fla, //solid object flammable
 	door_closed, //counts as a solid object for line of sight
-	door_open, //counts as empty for line of sight
-	chest
+	door_open //counts as empty for line of sight
 }

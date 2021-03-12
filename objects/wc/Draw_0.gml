@@ -3,8 +3,12 @@
 draw_text(100,10,"Debug Mode");
 for (var i=0; i<wid; i++) 
 	for (var k=0; k<hei; k++) {
+		var obj = object[# i,k];
 		var val = world[# i,k];
-		draw_tile(ts,val,0,30+i*unit,30+k*unit);
+		if obj == -1 || obj <= state.door_open || obj != player
+			draw_tile(ts,val,0,30+i*unit,30+k*unit);
+		else
+			draw_tile(ts,obj.tile,0,30+i*unit,30+k*unit)
 	}
 
 //draw UI

@@ -8,6 +8,8 @@ world = ds_grid_create(wid,hei);
 object = ds_grid_create(wid,hei);
 unit = 15; //value can be 15 for tight cell connection and 14 for seamless connection
 index = 0;
+dun_depth = 1; //0 depth is overword, 1 deth is frist level, higher depths are deeper into the structure
+dun_doors = ds_list_create();
 
 //fill grid
 for (var i=0; i<wid; i++) 
@@ -28,31 +30,5 @@ stand_on = 0;
 #macro ts_wid 48 //the tile set is 47 tiles accross
 #macro ts_hei 21 //the tile set is 21 tiles tall
 
-rooms = [];
-for (var i=0; i<5; i++) {
-	//pick spot for room
-	var r = new gen_room();
-	r.room_w = irandom_range(3,8);
-	r.room_h = irandom_range(3,8);
-	r.rc_x = irandom_range(1+r.room_w/2,wid-r.room_w/2); //room center x pos
-	r.rc_y = irandom_range(1+r.room_h/2,hei-r.room_h/2); //room center y pos
-	
-	r.room_gen();
-	rooms[i]=r;
-}
-///empty room internals
-for (var i=0; i<array_length(rooms); i++) {
-	with (rooms[i]) {
-		room_clear();
-	}
-}
-
-//connect wall corners
-connect_walls();
-
-//make a door and place player infront of it
-make_doors();
-
-
-//resolve unused parts of the map
-clear_uninitalized_grid();
+rooms=[];
+generate_structure();

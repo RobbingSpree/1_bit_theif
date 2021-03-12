@@ -15,15 +15,22 @@ function door(dest) constructor{
 	room_index = 0;
 	room_x = 0;
 	room_y = 0;
-	visited = false;
+	tile = ts_wid*28+20;
 	
 	static change_room = function(){
 		//feed random seed into room gen function if we've already visted this room
-		if visited
+		if destination == "Escape"{
 			random_set_seed(seed);
-		//store changes about this room
-		
-		//store this room
+			wc.dun_depth--;
+		} else {
+			randomize();
+			//store changes about this room
+			if wc.dun_depth != ds_list_size(wc.dun_doors) {
+				ds_list_add(wc.dun_doors,self);
+				wc.dun_depth++;
+			}
+		}			
+		//store this room's objects
 		
 		//empty grid
 		for (var i=0; i<ts_hei; i++)
@@ -31,7 +38,7 @@ function door(dest) constructor{
 				wc.world[# k,i] = 0;
 				wc.objects[# k,i] = 0;
 			}
-		
+		wc.rooms = [];
 		//generate new room
 		
 	}

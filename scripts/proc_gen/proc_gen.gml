@@ -1,5 +1,39 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+
+function generate_structure() {
+	with wc {
+		rooms = [];
+		for (var i=0; i<5; i++) {
+			//pick spot for room
+			var r = new gen_room();
+			r.room_w = irandom_range(3,8);
+			r.room_h = irandom_range(3,8);
+			r.rc_x = irandom_range(1+r.room_w/2,wid-r.room_w/2); //room center x pos
+			r.rc_y = irandom_range(1+r.room_h/2,hei-r.room_h/2); //room center y pos
+			
+			r.room_gen();
+			rooms[i]=r;
+		}
+		///empty room internals
+		for (var i=0; i<array_length(rooms); i++) {
+			with (rooms[i]) {
+				room_clear();
+			}
+		}
+	}
+	
+	//connect wall corners
+	connect_walls();
+	
+	//make a door and place player infront of it
+	make_doors();
+	
+	//resolve unused parts of the map
+	clear_uninitalized_grid();
+}
+
+
 /*
 function room_gen(room_w,room_h,rc_x,rc_y){
 	
@@ -71,21 +105,35 @@ function connect_walls() {
 }
 
 function make_doors(){
-	var row = -1;
-	var col = -1;
+	var esc_row = -1;
+	var esc_col = -1;
+	var nex_row = -1;
+	var nex_col = -1;
+	
 	for (var i=0; i<ts_hei; i++) 
 		for (var k=0; k<ts_wid; k++) {
 			if wc.object[# k,i] == state.solid_im {
 					if wc.object[# k+1,i] == state.solid_im && wc.object[# k-1,i] == state.solid_im {
-						col = k;
-						row = i;
+						esc_col = k;
+						esc_row = i;
+				}
+			}
+			if wc.object[# ts_wid-k,ts_hei-i] == state.solid_im {
+					if wc.object[# ts_wid-k-1,ts_hei-i] == state.solid_im && wc.object[# ts_wid-k+1,ts_hei-i] == state.solid_im {
+						nex_col = ts_wid-k;
+						nex_row = ts_hei-i;
 				}
 			}
 		}
-	wc.object[# col,row]=state.door_open;
-	wc.world[# col,row] = ts_wid*10+8;
-	tp_actor_from_to(wc.px,wc.py,col,row-1,true);
-	var esc = new door("Overworld");
+	wc.object[# esc_col,esc_row]=state.door_open;
+	wc.world[# esc_col,esc_row] = ts_wid*10+8;
+	wc.object[# nex_col,nex_row]=state.door_open;
+	wc.world[# nex_col,nex_row] = ts_wid*10+8;
+	tp_actor_from_to(wc.px,wc.py,esc_col,esc_row-1,true);
+	var esc = new door("Escape");
+	wc.object[# esc_col,esc_row-1]= esc;
+	var nex = new door("Deeper");
+	wc.object[# nex_col,nex_row+1] = nex;
 }
 
 function clear_uninitalized_grid(){
