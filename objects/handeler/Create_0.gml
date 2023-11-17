@@ -3,3 +3,9 @@
 
 
 active_deepth = 0;
+
+structure = [];
+directory = [];
+
+height = 0;
+

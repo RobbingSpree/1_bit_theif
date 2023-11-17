@@ -3,11 +3,10 @@
 
 
 draw_self();
-draw_text(10,20,cycle);
-draw_text(10,40,handeler.active_deepth);
-draw_text(10,60,depth);
-draw_text(10,80,px);
-draw_text(10,100,py);
+if deepth > 0
+	draw_text(x+15,y+10,"F"+string(deepth));
+else 
+	draw_text(x+15,y+10,"BF"+string(deepth*(-1)));
 
 //draw_controls
 /*

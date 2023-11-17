@@ -2,6 +2,7 @@
 // You can write your code in this editor
 
 deepth = 0;
+visual_depth = depth;
 
 zone_width = 5;
 zone_height = 5;
@@ -19,17 +20,8 @@ enum ground {
 	door
 }
 
-floor_space = [];
-for (var i=0; i<zone_width; i++) {
-	for (var k=0; k<zone_height; k++) {
-		floor_space[i,k] = ground.empty
-		if i==0 || i == zone_width-1 || k == 0 || k == zone_height-1
-			floor_space[i,k] = ground.wall;
-	}
-}
-floor_space[1,zone_width-2] = ground.stairs_down;
-floor_space[zone_height-2,1] = ground.stairs_up;
-floor_space[3,zone_height-1] = ground.door;
+floor_space = noone;
+
 
 //player details
 px = 3;

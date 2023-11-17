@@ -16,10 +16,13 @@ if handeler.active_deepth == 0 {
 	if cycle <= 0 {
 		x += xx*unit;
 		y += yy*unit;
-		cycle = move_cycle;
-		if position_meeting(x,y,overworld_entrance){
-			var loc = instance_create_depth(50,50,depth-1,location);
-			handeler.active_deepth = loc.depth;
+		if xx != 0 || yy != 0 {
+			cycle = move_cycle;
+			if position_meeting(x,y,overworld_entrance){
+				var loc = instance_create_depth(50,50,depth-1,location);
+				handeler.active_deepth = loc.depth;
+				loc.deepth = loc.depth;
+			}
 		}
 	} else {
 		cycle -= 1 + run; //ticks down faster if shift is held
@@ -28,6 +31,5 @@ if handeler.active_deepth == 0 {
 
 
 if keyboard_check_pressed(vk_escape) {
-	var loc = instance_create_depth(50,50,depth-1,location);
-	handeler.active_deepth = loc.depth;
+	change_floors();
 }
