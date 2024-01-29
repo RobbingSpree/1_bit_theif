@@ -17,6 +17,7 @@ if left draw_sprite_part(kenney_col,0,54*(unit+1),22*(unit+1),unit,unit,x-10,y);
 */
 
 //draw the room
+if floor_space != noone
 for (var i=0; i<zone_width; i++) {
 	for (var k=0; k<zone_height; k++) {
 		var cel = floor_space[i,k];
@@ -29,7 +30,7 @@ for (var i=0; i<zone_width; i++) {
 			case ground.stairs_up: 		xx=2; yy = 6; break;
 			case ground.door: 			xx=2; yy = 9; break;
 		}
-			
+		//the above code is calling specific tiles from a sheet
 		draw_sprite_part(kenney_col,0,xx*(unit+1),yy*(unit+1),unit,unit,(border+i)*unit+x,(border+k)*unit+y);
 	}
 }

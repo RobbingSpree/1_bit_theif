@@ -16,7 +16,9 @@ if handeler.active_deepth == deepth {
 	if cycle <= 0 {
 		if (xx != 0 || yy != 0) && (xx+px < zone_width && xx+px > 0 && yy+py < zone_height && yy+py > 0) {
 			cycle = move_cycle; 
-			var cel = floor_space[px+xx,py+yy] //destination cell
+			var cel = -1;
+			if floor_space != noone
+				cel = floor_space[px+xx,py+yy] //destination cell
 			switch (cel) {
 				case ground.empty: px += xx; py += yy; break;
 				case ground.stairs_down: px += xx; py += yy; change_floors("dwn"); break;

@@ -16,8 +16,7 @@ enum ground {
 	wall,
 	door,
 	stairs_down,
-	stairs_up,
-	door
+	stairs_up
 }
 
 floor_space = noone;
