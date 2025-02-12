@@ -2,7 +2,7 @@
 // You can write your code in this editor
 
 //get input
-if handeler.active_deepth == 0 {
+if active {
 	left = keyboard_check(vk_left) || keyboard_check(ord("A"));
 	right = keyboard_check(vk_right) || keyboard_check(ord("D"));
 	down = keyboard_check(vk_down) || keyboard_check(ord("S"));
@@ -19,9 +19,12 @@ if handeler.active_deepth == 0 {
 		if xx != 0 || yy != 0 {
 			cycle = move_cycle;
 			if position_meeting(x,y,overworld_entrance){
-				var loc = instance_create_depth(50,50,depth-1,location);
-				handeler.active_deepth = loc.depth;
-				loc.deepth = loc.depth;
+				//create location and call new area data
+				var struc = structure_create(-1) //-1 is the debug value for making astructure
+				//debug
+				active = false;
+				sheetx = elsewhere_sheetx;
+				sheety = elsewhere_sheety;
 			}
 		}
 	} else {
@@ -30,6 +33,7 @@ if handeler.active_deepth == 0 {
 }
 
 
+//debug
 if keyboard_check_pressed(vk_escape) {
 	change_floors();
 }

@@ -23,8 +23,10 @@ function structure_exit() {
 	}
 }
 
-function structure_create() {
-	
+function structure_create(index) {
+	var b = instance_create_layer(room_width/3,room_height/3,"floating_ui",building);
+	b.layout_index = index;
+	return b;
 }
 
 function generate_floor(wid,hei) {

@@ -1,0 +1,7 @@
+enum ground {
+	empty,
+	wall,
+	door,
+	stairs_down,
+	stairs_up
+}

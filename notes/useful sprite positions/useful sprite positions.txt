@@ -1,0 +1,7 @@
+person icon
+x 43
+y 16
+
+player position icon
+x 25
+y 0

@@ -1,2 +1,2 @@
-display_str = "";
+display_str = "Building";
 

@@ -1,0 +1,7 @@
+switch (cel) {
+			case ground.wall: 			xx=10; yy = 17; break;
+			case ground.empty: 			xx=0; yy = 0; break;
+			case ground.stairs_down: 	xx=3; yy = 6; break;
+			case ground.stairs_up: 		xx=2; yy = 6; break;
+			case ground.door: 			xx=2; yy = 9; break;
+		}
